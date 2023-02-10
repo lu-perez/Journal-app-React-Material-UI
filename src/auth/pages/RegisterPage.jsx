@@ -19,11 +19,10 @@ const formValidations = {
 }
 
 const RegisterPage = () => {
-  const dispatch = useDispatch()
-  const [formSubmitted, setFormSubmitted] = useState(false)
-
   const { status, errorMessage } = useSelector(state => state.auth)
+  const dispatch = useDispatch()
   const isCheckingAuthentication = useMemo(() => status === 'checking', [status])
+  const [formSubmitted, setFormSubmitted] = useState(false)
 
   const {
     formState, displayName, email, password, onInputChange, isFormValid,
