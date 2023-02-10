@@ -1,4 +1,4 @@
-import { signInWithGoogle } from '../../firebase/providers'
+import { registerUserWithEmailPassword, signInWithGoogle } from '../../firebase/providers'
 import { checkCredentials, login, logout } from './authSlice'
 
 export const checkAuthentication = (email, password) => {
@@ -17,5 +17,16 @@ export const startGoogleSignIn = () => {
     } else {
       dispatch(logout(result.errorMessage))
     }
+  }
+}
+
+export const startCreatingUserWithEmailPassword = ({ email, password, displayName }) => {
+  return async (dispatch) => {
+    dispatch(checkCredentials())
+    const { ok, uid, photoURL, errorMessage } = await registerUserWithEmailPassword({ email, password, displayName })
+    if (!ok) {
+      return dispatch(logout({ errorMessage }))
+    }
+    dispatch(login({ uid, displayName, email, photoURL }))
   }
 }
