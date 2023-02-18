@@ -11,10 +11,12 @@ const LoginPage = () => {
   const { status, errorMessage } = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
-  const { email, password, onInputChange } = useForm({
+  const initialForm = {
     email: '',
     password: ''
-  })
+  }
+
+  const { email, password, onInputChange } = useForm(initialForm)
 
   const isAuthenticating = useMemo(() => status === 'checking', [status])
 
