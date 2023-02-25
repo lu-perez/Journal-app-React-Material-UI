@@ -11,10 +11,10 @@ const LoginPage = () => {
   const { status, errorMessage } = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
-  const initialForm = {
+  const initialForm = useMemo(() => ({
     email: '',
     password: ''
-  }
+  }), [])
 
   const { email, password, onInputChange } = useForm(initialForm)
 
@@ -31,6 +31,10 @@ const LoginPage = () => {
     dispatch(startGoogleSignIn())
   }
 
+  const handleInputChange = (event) => {
+    onInputChange(event)
+  }
+
   return (
     <AuthLayout title="Login">
       <form onSubmit={onSubmit}>
@@ -43,7 +47,7 @@ const LoginPage = () => {
               fullWidth
               name="email"
               value={email}
-              onChange={onInputChange}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={12} sx={{ mt: 2 }}>
@@ -54,7 +58,7 @@ const LoginPage = () => {
               fullWidth
               name="password"
               value={password}
-              onChange={onInputChange}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid container display={errorMessage ? '' : 'none'} sx={{ mt: 2 }}>
