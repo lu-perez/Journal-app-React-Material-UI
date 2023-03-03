@@ -22,8 +22,8 @@ const SideBarItem = ({ title = '', body, id, date, imageUrls = [] }) => {
           <TurnedInNot />
         </ListItemIcon>
         <Grid container>
-          <ListItemText primary={newTitle}/>
-          <ListItemText secondary={body}/>
+          <ListItemText primary={newTitle} />
+          <ListItemText secondary={body} />
         </Grid>
       </ListItemButton>
     </ListItem>
